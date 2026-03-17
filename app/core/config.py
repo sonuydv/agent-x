@@ -1,3 +1,5 @@
+import os
+
 from pydantic.v1 import BaseSettings
 
 class Settings(BaseSettings):
@@ -11,6 +13,7 @@ class Settings(BaseSettings):
     DB_PROVIDER: str = "sqlite"
 
     class Config:
-        env_file = ".env"
+        env_file = ".env" if os.path.exists(".env") else None
+        case_sensitive = True
 
 settings = Settings()
